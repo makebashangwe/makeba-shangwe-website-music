@@ -54,11 +54,11 @@ export default function Home() {
           </div>
           <div className="order-1 lg:order-2">
             <img
-              src="/images/hero-942.webp"
-              srcSet="/images/hero-600.webp 600w, /images/hero-942.webp 942w"
+              src="/images/piano-1122.webp"
+              srcSet="/images/piano-600.webp 600w, /images/piano-1122.webp 1122w"
               sizes="(min-width: 1024px) 40rem, 100vw"
-              alt="Makeba Shangwe in a warm-lit recording studio"
-              className="aspect-[4/5] w-full object-cover object-[50%_20%] lg:aspect-auto lg:h-full"
+              alt="Makeba Shangwe seated at a grand piano in a warm-lit studio"
+              className="aspect-[4/5] w-full object-cover object-[45%_25%] lg:aspect-auto lg:h-full"
               fetchPriority="high"
             />
           </div>
