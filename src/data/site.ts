@@ -3,7 +3,7 @@ export const site = {
   name: 'Makeba Shangwe',
   roles: ['Songwriter', 'Creative Producer', 'Artist Development'],
   // Your live domain, used for SEO tags. Update after you connect a domain in Cloudflare.
-  url: 'https://makebashangwe.pages.dev',
+  url: 'https://music.makebashangwe.com',
   // Shangwe Studios: set to true to show its page, menu link and mentions across the site.
   showStudios: false,
   // Optional public contact email. Leave empty to show only the contact form.
