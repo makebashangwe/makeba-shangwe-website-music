@@ -30,7 +30,7 @@ To choose which part of a song plays:
 
 1. Open `scripts/previews.config.json`.
 2. Change `start` (seconds into the song) and optionally add `"duration": 30` to a track.
-3. Run `npm run previews` (macOS only; uses the Mac's built-in audio tools). Or rebuild one song: `npm run previews -- say-no`.
+3. Run `npm run previews` (macOS only; uses the Mac's built-in audio tools). This also redraws each song's waveform from the real audio. Or rebuild one song: `npm run previews -- circles`.
 
 To add a new song: put the file in `music_demos_pub/`, add a line to `scripts/previews.config.json`,
 run `npm run previews`, then add the song to `src/data/songs.ts` with the same `slug`.

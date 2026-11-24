@@ -6,48 +6,26 @@
   --color-cream: #ede4d5;
   --color-gold: #ba9062;
   --color-charcoal: #101011;
-  --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Bodoni Moda Variable', 'Didot', Georgia, serif;
+  --font-sans: 'Schibsted Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-sans); }
+  body { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.6; }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.01em; text-wrap: balance; }
   ::selection { background: var(--color-gold); color: var(--color-charcoal); }
   :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; }
 }
 
-/* Small uppercase label above headings */
-.eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  font-weight: 500;
-}
+/* Kept for the hidden Studios page */
+.eyebrow { font-size: 0.875rem; color: var(--color-gold); }
+.reveal { opacity: 1; }
 
-/* Subtle film grain over the whole page */
-.grain::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Scroll reveal */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.reveal.is-visible { opacity: 1; transform: none; }
-
-@keyframes slow-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
-.hero-zoom { animation: slow-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-@keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.fade-up { animation: fade-up 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+/* The one load moment: hero text settles in */
+@keyframes settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.settle { animation: settle 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero-zoom, .fade-up { animation: settle 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .hero-zoom, .fade-up { animation: none; }
+  .settle, .hero-zoom, .fade-up { animation: none; }
 }

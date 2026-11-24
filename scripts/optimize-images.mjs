@@ -12,7 +12,7 @@ const jobs = [
   // name, file, crop (left, top, width, height) or null, widths
   ['hero', 'Warm Studio Portrait Without Nose Jewelry.png', { left: 180, top: 0, width: 942, height: 1402 }, [600, 942]],
   ['piano', 'Thoughtful Pianist in Warm Studio Glow.png', null, [600, 1122]],
-  ['process', 'Forest Green Sweater Studio Session.png', { left: 0, top: 560, width: 1122, height: 842 }, [600, 1122]],
+  ['process', 'Keyboard Notes Fixed Keys.png', null, [600, 1048]],
   ['headshot', 'file_00000000d39c81f5b1c2327a240d44d5.png', null, [768, 1536]],
   ['portrait', '04_main_portrait (1).png', null, [700]],
   ['notes', 'Boredom and Notes in Warm Light.png', null, [600, 1122]],

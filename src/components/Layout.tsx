@@ -27,8 +27,8 @@ function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled || open ? 'bg-charcoal/90 backdrop-blur-md' : 'bg-transparent'}`}>
       <Container className="flex h-20 items-center justify-between">
-        <Link to="/" className="font-serif text-xl tracking-wide text-cream" aria-label={`${site.name}, home`}>
-          Makeba <span className="text-gold">Shangwe</span>
+        <Link to="/" className="font-serif text-2xl text-cream" aria-label={`${site.name}, home`}>
+          Makeba Shangwe
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-9 md:flex">
           {nav.map((n) => (
@@ -36,7 +36,7 @@ function Header() {
               key={n.to}
               to={n.to}
               className={({ isActive }) =>
-                `text-sm tracking-wide transition-colors ${isActive ? 'text-gold' : 'text-cream/75 hover:text-cream'} ${n.to === '/contact' ? 'rounded-full border border-gold/60 px-5 py-2 hover:border-gold' : ''}`
+                `text-[0.95rem] transition-colors ${isActive ? 'text-gold' : 'text-cream/80 hover:text-cream'}`
               }
             >
               {n.label}
@@ -60,7 +60,7 @@ function Header() {
         <nav id="mobile-nav" aria-label="Mobile" className="border-t border-cream/10 md:hidden">
           <Container className="flex flex-col py-4">
             {[{ to: '/', label: 'Home' }, ...nav].map((n) => (
-              <NavLink key={n.to} to={n.to} end className={({ isActive }) => `py-3 font-serif text-2xl ${isActive ? 'text-gold' : 'text-cream'}`}>
+              <NavLink key={n.to} to={n.to} end className={({ isActive }) => `py-3 font-serif text-3xl ${isActive ? 'text-gold' : 'text-cream'}`}>
                 {n.label}
               </NavLink>
             ))}
@@ -73,11 +73,11 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="border-t border-cream/10 bg-charcoal py-14">
+    <footer className="bg-espresso py-14">
       <Container className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="font-serif text-3xl text-cream">Makeba <span className="text-gold">Shangwe</span></p>
-          <p className="mt-3 text-sm text-cream/50">{site.roles.join(' • ')}{site.showStudios && ' · Founder, Shangwe Studios'}</p>
+          <p className="font-serif text-3xl text-cream">Makeba Shangwe</p>
+          <p className="mt-3 text-sm text-cream/50">Songwriter, producer and A&R in training{site.showStudios && '. Founder of Shangwe Studios'}</p>
         </div>
         <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-cream/60">
           {nav.map((n) => (
@@ -101,7 +101,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
   return (
-    <div className="grain flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-charcoal">
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded focus:bg-gold focus:px-4 focus:py-2 focus:text-charcoal">
         Skip to content
       </a>

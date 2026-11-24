@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
-import AudioCard from '../components/AudioCard';
-import Reveal from '../components/Reveal';
-import { ButtonLink, Container, SectionHeading, SpotifyButton, AppleMusicButton } from '../components/ui';
+import { Link } from 'react-router-dom';
+import Track from '../components/Track';
+import { ButtonLink, Container, StreamLinks } from '../components/ui';
 import { site } from '../data/site';
 import { songs } from '../data/songs';
 import { useSeo } from '../lib/useSeo';
 
 const lookingFor = [
-  { title: 'Vocalists', body: 'Professional singers to bring finished demos to full, release-ready performances.' },
-  { title: 'Producers', body: 'Producers who can take a complete composition and make it commercially competitive.' },
-  { title: 'Engineers', body: 'Mix and mastering engineers to finish records to industry standard.' },
-  { title: 'Artists & managers', body: 'Recording artists looking for original songs that fit their sound.' },
-  { title: 'Publishers & A&R', body: 'Publishing and A&R teams looking for placements and new writers.' },
+  { who: 'Vocalists', what: 'to bring finished demos to full, release-ready performances.' },
+  { who: 'Producers', what: 'who can take a complete composition and make it commercially competitive.' },
+  { who: 'Engineers', what: 'to mix and master records to industry standard.' },
+  { who: 'Artists and managers', what: 'looking for original songs that fit their sound.' },
+  { who: 'Publishers and A&R', what: 'looking for placements and new writers.' },
 ];
 
 export default function Home() {
@@ -37,31 +37,53 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-charcoal">
-        <div className="absolute inset-x-0 top-0 h-[62%] overflow-hidden sm:h-[70%] lg:inset-y-0 lg:left-auto lg:right-0 lg:h-full lg:w-[52%]">
-          <img
-            src="/images/hero-942.webp"
-            srcSet="/images/hero-600.webp 600w, /images/hero-942.webp 942w"
-            sizes="(min-width: 1024px) 52vw, 100vw"
-            alt="Makeba Shangwe in a warm-lit recording studio"
-            className="hero-zoom size-full object-cover object-[50%_20%]"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-charcoal/30 lg:bg-gradient-to-r lg:from-charcoal lg:via-charcoal/40 lg:to-transparent" />
-        </div>
-        <Container className="relative pb-16 pt-40 sm:pb-28">
-          <div className="max-w-3xl">
-            <p className="eyebrow fade-up">Songwriter · Creative Producer · Artist Development</p>
-            <h1 className="fade-up mt-6 font-serif text-[2.9rem] leading-[0.98] tracking-tight text-cream sm:text-8xl" style={{ animationDelay: '120ms' }}>
-              Every world begins <em className="font-light text-gold">with a song.</em>
+      {/* Hero: text left, photo right with a hard edge */}
+      <section className="bg-charcoal pt-20 lg:pt-0">
+        <div className="mx-auto grid max-w-[90rem] lg:min-h-[100svh] lg:grid-cols-[1fr_minmax(0,40rem)]">
+          <div className="order-2 flex flex-col justify-end px-6 pb-16 pt-10 sm:px-10 lg:order-1 lg:pb-24 lg:pl-[max(2.5rem,calc((100vw-72rem)/2))] lg:pt-40">
+            <h1 className="settle max-w-[13ch] text-[3.25rem] font-semibold leading-[0.98] text-cream sm:text-7xl xl:text-[6.25rem]">
+              Every world begins with a song.
             </h1>
-            <p className="fade-up mt-8 max-w-xl text-lg text-cream/75" style={{ animationDelay: '260ms' }}>
+            <p className="settle mt-8 max-w-md text-lg text-cream/70" style={{ animationDelay: '150ms' }}>
               Makeba Shangwe <span className="text-gold">|</span> Songwriter • Creative Producer • Artist Development
             </p>
-            <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ animationDelay: '380ms' }}>
+            <div className="settle mt-10 flex flex-wrap items-center gap-x-8 gap-y-4" style={{ animationDelay: '300ms' }}>
               <ButtonLink to="/songwriting">Listen to the songs</ButtonLink>
-              <ButtonLink to="/contact" variant="outline">Collaborate</ButtonLink>
+              <ButtonLink to="/contact" variant="outline">Get in touch</ButtonLink>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <img
+              src="/images/hero-942.webp"
+              srcSet="/images/hero-600.webp 600w, /images/hero-942.webp 942w"
+              sizes="(min-width: 1024px) 40rem, 100vw"
+              alt="Makeba Shangwe in a warm-lit recording studio"
+              className="aspect-[4/5] w-full object-cover object-[50%_20%] lg:aspect-auto lg:h-full"
+              fetchPriority="high"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Featured songs */}
+      <section className="bg-charcoal py-24 sm:py-32">
+        <Container>
+          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <h2 className="text-4xl text-cream sm:text-5xl">Start here</h2>
+            <p className="max-w-sm text-cream/60">Short previews of complete demos. Full demos are available to industry professionals on request.</p>
+          </div>
+          <ol className="mt-10 border-b border-cream/12">
+            {featured.map((s) => (
+              <Track key={s.slug} song={s} number={songs.indexOf(s) + 1} />
+            ))}
+          </ol>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <Link to="/songwriting" className="text-cream underline decoration-gold/60 underline-offset-[6px] hover:decoration-gold">
+              All {songs.length} songs
+            </Link>
+            <div className="flex flex-wrap items-center gap-x-6 text-cream/60">
+              <span>More published demos on</span>
+              <StreamLinks />
             </div>
           </div>
         </Container>
@@ -69,122 +91,62 @@ export default function Home() {
 
       {/* Intro */}
       <section className="bg-cream py-24 text-charcoal sm:py-32">
-        <Container className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-          <Reveal>
-            <SectionHeading eyebrow="Introduction" title={<>Complete songs, written from the <em className="text-espresso">first line to the last chord.</em></>} light>
+        <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-20">
+          <img
+            src="/images/notes-1122.webp"
+            srcSet="/images/notes-600.webp 600w, /images/notes-1122.webp 1122w"
+            sizes="(min-width: 1024px) 26rem, 100vw"
+            alt="Makeba writing lyrics in a notebook, with a keyboard, guitar and headphones nearby"
+            loading="lazy"
+            className="aspect-[4/5] w-full object-cover"
+          />
+          <div className="max-w-xl">
+            <h2 className="text-4xl leading-[1.1] sm:text-5xl">I write the whole song.</h2>
+            <div className="mt-6 space-y-5 text-lg leading-relaxed text-charcoal/80">
               <p>
-                I write original music: lyrics, melodies, harmonies, rhythms and instrumental arrangements. My catalogue of demos is ready to
-                grow. I'm looking for vocalists, producers and engineers to turn these songs into competitive records, and for artists ready
-                for their next placement.
+                Lyrics, melody, harmony, rhythm and the instrumental arrangement. Each song leaves my notebook as a complete demo, ready for
+                the right voice and the right production.
               </p>
-              <p className="mt-5">
-                Alongside songwriting, I'm growing into artist development and A&R.
-                {site.showStudios && " I'm also building Shangwe Studios, a home for original music, characters and the worlds they live in."}
+              <p>
+                I'm building a career as a songwriter, and growing into artist development and A&R: finding the song that fits the artist,
+                and helping a project find its sound.
               </p>
-            </SectionHeading>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink to="/about" variant="dark">Read my story</ButtonLink>
             </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <img
-              src="/images/notes-1122.webp"
-              srcSet="/images/notes-600.webp 600w, /images/notes-1122.webp 1122w"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              alt="Makeba writing lyrics in a notebook, surrounded by a keyboard, guitar and headphones"
-              loading="lazy"
-              className="aspect-[4/5] w-full rounded-sm object-cover shadow-2xl shadow-espresso/30"
-            />
-          </Reveal>
+            <div className="mt-8">
+              <ButtonLink to="/about" variant="dark">About me</ButtonLink>
+            </div>
+          </div>
         </Container>
       </section>
 
-      {/* Featured compositions */}
-      <section className="bg-charcoal py-24 sm:py-32">
-        <Container>
-          <Reveal className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <SectionHeading eyebrow="Featured compositions" title="Press play.">
-              <p>Short previews of complete demos. More published demos are streaming on Spotify and Apple Music, and full demos are available to industry professionals on request.</p>
-            </SectionHeading>
-            <div className="flex flex-wrap gap-4">
-              <ButtonLink to="/songwriting" variant="outline">Full catalogue</ButtonLink>
-              <SpotifyButton href={site.spotify} label="Spotify" />
-              <AppleMusicButton href={site.appleMusic} label="Apple Music" />
+      {/* Who I'm looking for */}
+      <section className="bg-forest py-24 sm:py-32">
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+          <div>
+            <h2 className="text-4xl leading-[1.1] text-cream sm:text-5xl">The songs are written. Now I need the people who make records.</h2>
+            <div className="mt-8">
+              <ButtonLink to="/contact">Start a conversation</ButtonLink>
             </div>
-          </Reveal>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {featured.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 120}>
-                <AudioCard song={s} index={i} compact />
-              </Reveal>
+          </div>
+          <dl className="divide-y divide-cream/15 border-y border-cream/15">
+            {lookingFor.map((l) => (
+              <div key={l.who} className="py-5">
+                <dt className="font-serif text-2xl text-cream">{l.who}</dt>
+                <dd className="mt-1 text-cream/65">{l.what}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </Container>
       </section>
 
-      {/* Looking for */}
-      <section className="bg-espresso py-24 sm:py-32">
+      {/* Closing */}
+      <section className="bg-charcoal py-28 sm:py-36">
         <Container>
-          <Reveal>
-            <SectionHeading eyebrow="Open to collaboration" title="The songs are written. Let's make the records.">
-              <p>I'm not looking for someone to write with me from scratch. I'm looking for the people who take great songs the rest of the way.</p>
-            </SectionHeading>
-          </Reveal>
-          <div className="mt-16 grid gap-px overflow-hidden rounded-sm border border-cream/10 bg-cream/10 sm:grid-cols-2 lg:grid-cols-5">
-            {lookingFor.map((l, i) => (
-              <Reveal key={l.title} delay={i * 80} className="bg-espresso p-7">
-                <p className="font-serif text-sm text-gold">{String(i + 1).padStart(2, '0')}</p>
-                <h3 className="mt-4 font-serif text-2xl text-cream">{l.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-cream/65">{l.body}</p>
-              </Reveal>
-            ))}
+          <h2 className="max-w-3xl text-5xl leading-[1.05] text-cream sm:text-6xl">Have an artist who needs the right song?</h2>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <ButtonLink to="/contact">Get in touch</ButtonLink>
+            <ButtonLink to="/songwriting" variant="outline">Hear the catalogue</ButtonLink>
           </div>
-          <div className="mt-12"><ButtonLink to="/contact">Start a conversation</ButtonLink></div>
-        </Container>
-      </section>
-
-      {/* Studios preview */}
-      {site.showStudios && (
-      <section className="relative overflow-hidden bg-forest">
-        <div className="grid lg:grid-cols-2">
-          <div className="relative min-h-[420px] lg:min-h-[680px]">
-            <img
-              src="/images/piano-1122.webp"
-              srcSet="/images/piano-600.webp 600w, /images/piano-1122.webp 1122w"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              alt="Makeba seated at a grand piano in a dim studio"
-              loading="lazy"
-              className="absolute inset-0 size-full object-cover object-[50%_25%]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-forest/80 to-transparent lg:bg-gradient-to-l lg:from-forest lg:via-transparent" />
-          </div>
-          <Container className="flex items-center py-20 lg:py-28 lg:pl-16">
-            <Reveal>
-              <p className="eyebrow">Shangwe Studios</p>
-              <h2 className="mt-4 font-serif text-4xl leading-[1.08] text-cream sm:text-5xl">Songs that open into <em className="text-gold">whole worlds.</em></h2>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/70">
-                Shangwe Studios is my growing creative venture. It brings together original music, fictional and virtual artists, music videos,
-                animation and storytelling, all part of connected creative worlds.
-              </p>
-              <p className="mt-4 text-sm text-cream/50">Currently in development.</p>
-              <div className="mt-10"><ButtonLink to="/studios" variant="outline">Explore the vision</ButtonLink></div>
-            </Reveal>
-          </Container>
-        </div>
-      </section>
-      )}
-
-      {/* Closing CTA */}
-      <section className="bg-charcoal py-28 text-center sm:py-36">
-        <Container>
-          <Reveal>
-            <p className="eyebrow">Placements · Publishing · Collaboration</p>
-            <h2 className="mx-auto mt-6 max-w-3xl font-serif text-5xl leading-[1.05] text-cream sm:text-6xl">Have an artist who needs the right song?</h2>
-            <div className="mt-12 flex flex-wrap justify-center gap-4">
-              <ButtonLink to="/contact">Get in touch</ButtonLink>
-              <ButtonLink to="/songwriting" variant="outline">Hear the catalogue</ButtonLink>
-            </div>
-          </Reveal>
         </Container>
       </section>
     </>

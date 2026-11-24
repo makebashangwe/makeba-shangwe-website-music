@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react';
-import Reveal from '../components/Reveal';
 import { Container, PageHero } from '../components/ui';
 import { site } from '../data/site';
 import { useSeo } from '../lib/useSeo';
@@ -16,7 +15,7 @@ const inquiries = [
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const field = 'w-full rounded-sm border border-cream/15 bg-charcoal/60 px-4 py-3.5 text-cream placeholder:text-cream/30 transition-colors focus:border-gold focus:outline-none';
-const label = 'mb-2 block text-xs uppercase tracking-[0.18em] text-cream/60';
+const label = 'mb-2 block text-sm text-cream/70';
 
 function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -61,7 +60,7 @@ function ContactForm() {
         <input id="email" name="email" type="email" required autoComplete="email" className={field} />
       </div>
       <div>
-        <label htmlFor="company" className={label}>Role / company <span className="normal-case tracking-normal text-cream/35">(optional)</span></label>
+        <label htmlFor="company" className={label}>Role / company <span className="text-cream/40">(optional)</span></label>
         <input id="company" name="company" autoComplete="organization" className={field} placeholder="e.g. A&R, Label name" />
       </div>
       <div>
@@ -78,7 +77,7 @@ function ContactForm() {
         <textarea id="message" name="message" required rows={6} className={field} placeholder="Tell me about the project, the artist or the song you're interested in." />
       </div>
       <div className="sm:col-span-2">
-        <label htmlFor="links" className={label}>Links <span className="normal-case tracking-normal text-cream/35">(optional)</span></label>
+        <label htmlFor="links" className={label}>Links <span className="text-cream/40">(optional)</span></label>
         <input id="links" name="links" className={field} placeholder="Portfolio, artist page, Spotify, etc." />
       </div>
       {/* Spam honeypot */}
@@ -89,7 +88,7 @@ function ContactForm() {
         <button
           type="submit"
           disabled={!configured || status === 'sending'}
-          className="rounded-full bg-gold px-9 py-4 text-sm font-medium tracking-wide text-charcoal transition-colors hover:bg-cream disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-[2px] bg-gold px-7 py-3.5 text-[0.95rem] font-medium text-charcoal transition-colors hover:bg-cream disabled:cursor-not-allowed disabled:opacity-50"
         >
           {status === 'sending' ? 'Sending…' : 'Send message'}
         </button>
@@ -108,8 +107,7 @@ export default function Contact() {
   return (
     <>
       <PageHero
-        eyebrow="Contact & collaborate"
-        title={<>Let's make <em className="text-gold">the record.</em></>}
+        title="Let's make the record"
         intro={<p>For placements, publishing, collaborations, A&R and creative partnerships. Tell me what you're working on.</p>}
         image="/images/hero-942.webp"
         imageAlt="Makeba Shangwe in a recording studio"
@@ -118,12 +116,12 @@ export default function Contact() {
 
       <section className="bg-charcoal py-24 sm:py-28">
         <Container className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-          <Reveal>
-            <p className="eyebrow">What I'm open to</p>
-            <ul className="mt-8 divide-y divide-cream/10 border-y border-cream/10">
+          <div>
+            <h2 className="text-3xl text-cream">What I'm open to</h2>
+            <ul className="mt-6 divide-y divide-cream/10 border-y border-cream/10">
               {inquiries.map((i) => (
                 <li key={i.title} className="py-5">
-                  <h2 className="font-serif text-xl text-cream">{i.title}</h2>
+                  <h3 className="text-xl text-cream">{i.title}</h3>
                   <p className="mt-1 text-sm text-cream/55">{i.body}</p>
                 </li>
               ))}
@@ -133,10 +131,10 @@ export default function Contact() {
                 Prefer email? <a href={`mailto:${site.email}`} className="text-gold underline-offset-4 hover:underline">{site.email}</a>
               </p>
             )}
-          </Reveal>
-          <Reveal delay={120}>
+          </div>
+          <div>
             <ContactForm />
-          </Reveal>
+          </div>
         </Container>
       </section>
     </>
