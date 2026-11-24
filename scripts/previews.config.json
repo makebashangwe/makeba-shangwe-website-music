@@ -1,0 +1,20 @@
+{
+  "_readme": "Edit start (seconds into the song) and duration to choose which part of each song is public. Then run: npm run previews  (macOS only). Full songs in music_demos_pub/ are never published.",
+  "sourceDir": "music_demos_pub",
+  "outDir": "public/audio/previews",
+  "defaultDuration": 45,
+  "tracks": [
+    { "slug": "circles", "file": "SAYNO(FINISHED).wav", "start": 45 },
+    { "slug": "see-u-again", "file": "SEE U Again.wav", "start": 0, "duration": 60 },
+    { "slug": "wonder-to-me", "file": "Wonder to Me_with_vocals(4).m4a", "start": 45 },
+    { "slug": "arrythmia", "file": "ARRYTHMIA_FINISHEDCOPY.wav", "start": 5 },
+    { "slug": "shawty-took-my-heart", "file": "SHAWTY_TOOK_MY_HEART_MIXED_FINISHED.m4a", "start": 45 },
+    { "slug": "crush-my-vibe", "file": "Crush My Vibe.m4a", "start": 45 },
+    { "slug": "surface", "file": "SURFACE(originalnamecup).m4a", "start": 45 },
+    { "slug": "narnia", "file": "NARNIA.mp3", "start": 45 },
+    { "slug": "issue", "file": "ISSUE.m4a", "start": 45 },
+    { "slug": "over", "file": "OVER.m4a", "start": 45 },
+    { "slug": "levitatin", "file": "LEVMIX.m4a", "start": 30 },
+    { "slug": "user-mast", "file": "User Mast.wav", "start": 45 }
+  ]
+}
