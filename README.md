@@ -43,12 +43,8 @@ For the sharpest results on high-resolution screens, use originals at least 2400
 
 ## Contact form (Formspree)
 
-1. Create a free account at https://formspree.io and make a new form. Set it to send to the email address you want.
-2. Copy the form ID (the part after `https://formspree.io/f/`).
-3. In Cloudflare Pages: **Settings → Variables and Secrets → Add**: name `VITE_FORMSPREE_ID`, value = your ID. Add it for Production (and Preview if you like).
-4. Redeploy. For local testing, copy `.env.example` to `.env` and paste the ID there.
-
-Until the ID is set, the form shows a "not connected yet" note and the button stays disabled.
+The form sends to Formspree form `mnpdorjq` (set in `src/data/site.ts`). Messages go to the email on your
+Formspree account. To switch forms, change `formspreeId` there and push.
 
 ## Deploy: GitHub → Cloudflare Pages
 

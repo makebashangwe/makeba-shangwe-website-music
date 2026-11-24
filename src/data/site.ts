@@ -16,6 +16,6 @@ export const site = {
     { label: 'Spotify', href: 'https://open.spotify.com/album/0cJA5c0N4KXG4W7eAcryGh' },
     { label: 'Apple Music', href: 'https://music.apple.com/us/album/zero-gravity/1878610642' },
   ] as { label: string; href: string }[],
-  // Formspree form ID comes from the VITE_FORMSPREE_ID environment variable (see README).
-  formspreeId: import.meta.env.VITE_FORMSPREE_ID as string | undefined,
+  // Formspree form ID (the part after https://formspree.io/f/). It's public by design.
+  formspreeId: (import.meta.env.VITE_FORMSPREE_ID as string | undefined) || 'mnpdorjq',
 };
