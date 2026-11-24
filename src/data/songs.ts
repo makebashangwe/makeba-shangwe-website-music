@@ -23,8 +23,8 @@ export interface Song {
 
 const writer = { role: 'Written, composed & produced by', name: 'Makeba Shangwe' };
 // For songs where the underlying production/instrumental is someone else's work.
-const writerArranger = { role: 'Written & arranged by', name: 'Makeba Shangwe' };
-const outsideProduction = 'Instrumental production is not my work. My credit is for the writing and arrangement.';
+const writerArranger = { role: 'Written, arranged & sung by', name: 'Makeba Shangwe' };
+const outsideProduction = 'The writing, arrangement and vocals are mine. The instrumental production is not my work.';
 
 export const songs: Song[] = [
   { slug: 'levitatin', title: 'Levitatin\'', status: 'Complete demo', credits: [writerArranger], note: outsideProduction, featured: true },

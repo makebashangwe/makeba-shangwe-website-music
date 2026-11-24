@@ -96,7 +96,7 @@ export default function AudioCard({ song, index, compact = false }: { song: Song
             </p>
           ))}
           {song.note && <p className="text-xs italic text-cream/50">{song.note}</p>}
-          <p className="text-xs text-cream/40">© Makeba Shangwe{song.note ? ' (lyrics & composition)' : ''}. All rights reserved.</p>
+          <p className="text-xs text-cream/40">© Makeba Shangwe{song.note ? ' (lyrics, composition & vocals)' : ''}. All rights reserved.</p>
           {song.links && song.links.length > 0 && (
             <div className="flex flex-wrap gap-4 pt-1">
               {song.links.map((l) => (
